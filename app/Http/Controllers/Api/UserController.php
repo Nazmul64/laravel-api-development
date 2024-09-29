@@ -47,4 +47,37 @@ public function addusers(Request $request){
     }
 }
 
+public function addmultipleusers(Request $request){
+    if($request->isMethod('post')){
+        $data=$request->all();
+
+        $roles =[
+            'users.*.name'=>'required',
+            'users.*.email'=>'required',
+            'users.*.password'=>'required',
+        ];
+
+        $customMessages=[
+            'users.*.name.required'=>'name is required',
+            'users.*.email.required'=>'email is required',
+            'users.*.password.required'=>'password is required',
+        ];
+
+        $validator = Validator::make($data, $roles, $customMessages);
+        if($validator->fails()){
+            return response()->json($validator->errors(), 422);
+        }
+      foreach($data['users'] as $adduser){
+
+        $user=new User();
+        $user->name=$adduser['name'];
+        $user->email=$adduser['email'];
+        $user->password=bcrypt($adduser['password']);
+        $message="User Successfully Added";
+        $user->save();
+      }
+      return response()->json(['message'=>$message],422);
+    }
+}
+
 }
