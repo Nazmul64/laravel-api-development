@@ -385,7 +385,7 @@
     <div class="container">
       <div class="header-desk header-desk_type_1">
         <div class="logo">
-          <a href="index.html">
+          <a href="{{route('home')}}">
             <img src="{{asset('frontend')}}/assets/images/logo.png" alt="Uomo" class="logo__image d-block" />
           </a>
         </div>
@@ -393,7 +393,7 @@
         <nav class="navigation">
           <ul class="navigation__list list-unstyled d-flex">
             <li class="navigation__item">
-              <a href="index.html" class="navigation__link">Home</a>
+              <a href="{{route('home')}}" class="navigation__link">Home</a>
             </li>
             <li class="navigation__item">
               <a href="shop.html" class="navigation__link">Shop</a>
@@ -456,15 +456,24 @@
               </form>
             </div>
           </div>
-
-          <div class="header-tools__item hover-container">
-            <a href="login.html" class="header-tools__item">
-              <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+          @guest
+        <div class="header-tools__item hover-container">
+        <a href="{{route('login')}}" class="header-tools__item">
+            <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <use href="#icon_user" />
+            </svg>
+        </a>
+        </div>
+        @else
+        <div class="header-tools__item hover-container">
+           <a href="{{Auth::user()->utype==='ADM' ? route('admin.index') : route('users.index')}}" class="header-tools__item">
+              <span>{{ Auth::user()->name }}</span>
+              <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                 <use href="#icon_user" />
               </svg>
-            </a>
-          </div>
+           </a>
+        </div>
+        @endguest
 
           <a href="wishlist.html" class="header-tools__item">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
