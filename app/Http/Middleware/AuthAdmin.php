@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Contracts\Session\Session as SessionSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -18,16 +17,15 @@ class AuthAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::check()){
-            if(Auth::user()->uptype==='ADM'){
+        if (Auth::check()) {
+            if (Auth::user()->utype === 'ADM') {
                 return $next($request);
-            }else{
-               Session::flush();
-               return redirect()->route('login');
+            } else {
+                Session::flush();
+                return redirect()->route('login');
             }
-        }else{
+        } else {
             return redirect()->route('login');
         }
-
     }
 }
