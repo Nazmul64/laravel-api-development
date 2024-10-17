@@ -21,6 +21,7 @@ Route::middleware(['auth'])->group(function(){
 });
 Route::middleware(['auth', AuthAdmin::class])->group(function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-    Route::get('/admin/brands', [AdminController::class, 'brands'])->name('brand.brand');
+    Route::get('/admin/brands/show', [AdminController::class, 'show'])->name('show.blade');
     Route::get('/admin/brands', [AdminController::class, 'add_brand'])->name('brand.brand.add');
+    Route::post('/admin/brands/store', [AdminController::class, 'brand_store'])->name('brand.store');
 });

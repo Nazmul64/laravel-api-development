@@ -34,9 +34,10 @@
                         </a>
                         <ul class="sub-menu">
                             <li class="sub-menu-item">
-                                <a href="{{route('brand.brand')}}">
-                                    <div class="text">Add Brand</div>
+                                <a href="{{ route('show.blade') }}">
+                                    <div class="text"> Add Brand </div>
                                 </a>
+
                             </li>
                             <li class="sub-menu-item">
                                 <a href="#">
